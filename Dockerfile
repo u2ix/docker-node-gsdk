@@ -8,7 +8,7 @@ ENV CCI /home/circleci
 ENV GTMP /tmp/gcloud-install
 ENV GSDK $CCI/google-cloud-sdk
 ENV PATH="${GSDK}/bin:${PATH}"
-ENV DOCKER_VER="17.03.0-ce"
+ENV DOCKER_VER="18.06.0-ce"
 
 # do all system lib installation in one-line to optimize layers
 RUN curl -sSL https://sdk.cloud.google.com > $GTMP && bash $GTMP --install-dir=$CCI --disable-prompts \
