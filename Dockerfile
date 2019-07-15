@@ -21,10 +21,15 @@ RUN curl -L -o /tmp/docker-$DOCKER_VER.tgz https://download.docker.com/linux/sta
   && tar -xz -C /tmp -f /tmp/docker-$DOCKER_VER.tgz \
   && mv /tmp/docker/* /usr/bin
 
+# Install kubectl
+RUN curl -L -o /tmp/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+  && chmod +x /tmp/kubectl \
+  && sudo mv /tmp/kubectl /usr/local/bin/kubectl
+
 # change back to the user in the FROM image
 USER circleci
 
 # setup gcloud specifics to your liking
 RUN gcloud config set core/disable_usage_reporting true \
   && gcloud config set component_manager/disable_update_check true \
-  && gcloud components install alpha beta kubectl --quiet
+  && gcloud components install alpha beta --quiet
